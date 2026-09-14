@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Is It Greg?",
   "version": "1.0.0",
-  "description": "Highlights Hacker News submissions that link to greg.technology (or any subdomain).",
+  "description": "Highlights Hacker News submissions that link to greg.technology (or any subdomain), with a dancing Greg who throws more Gregs.",
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",
@@ -25,7 +25,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "images/greg.png"
+        "images/greg.png",
+        "images/greg-dance.gif"
       ],
       "matches": [
         "https://news.ycombinator.com/*"

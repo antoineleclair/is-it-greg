@@ -13,9 +13,224 @@
   font-weight: bold;
   line-height: 1.4;
   vertical-align: middle;
+  cursor: default;
 }
 
 .is-greg-face {
   width: 14px;
   height: 14px;
+}
+
+/* The badge the dancer just jumped to. */
+@keyframes is-greg-found-pulse {
+  from { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); }
+  to { box-shadow: 0 0 0 9px rgba(255, 102, 0, 0); }
+}
+
+.is-greg-found {
+  animation: is-greg-found-pulse 700ms ease-out 2;
+}
+
+/* Hover tooltip — why this thing is flagged, delivered by a dancing Greg. */
+
+.is-greg-tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2147483001;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 280px;
+  padding: 7px 11px 7px 8px;
+  border-radius: 8px;
+  background-color: #2b2b2b;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+  color: #fff;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 11px;
+  line-height: 1.45;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(3px);
+  transition: opacity 130ms ease, transform 130ms ease;
+}
+
+.is-greg-tip-visible {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+
+.is-greg-tip-face {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+
+.is-greg-tip-text {
+  padding-top: 1px;
+}
+
+/* Arrow, parked under whichever badge we're pointing at. */
+.is-greg-tip::after {
+  content: "";
+  position: absolute;
+  left: var(--is-greg-arrow-x, 50%);
+  bottom: -5px;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #2b2b2b;
+}
+
+.is-greg-tip-below::after {
+  bottom: auto;
+  top: -5px;
+  border-top: 0;
+  border-bottom: 5px solid #2b2b2b;
+}
+
+/* Greg, dancing in the corner of any page he turns up on. */
+
+.is-greg-dancer {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483000;
+  line-height: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.is-greg-dancer-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.is-greg-dancer-button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.is-greg-dancer-face {
+  display: block;
+  width: 76px;
+  height: 76px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  transition: transform 160ms ease;
+}
+
+.is-greg-dancer-button:hover .is-greg-dancer-face {
+  transform: scale(1.08);
+}
+
+.is-greg-dancer-button:active .is-greg-dancer-face {
+  transform: scale(0.94);
+}
+
+.is-greg-dancer-count {
+  position: absolute;
+  left: -2px;
+  bottom: 2px;
+  min-width: 8px;
+  margin: 0;
+  padding: 1px 6px;
+  border: 0;
+  border-radius: 9px;
+  background-color: #ff6600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1.5;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.is-greg-dancer-button:focus-visible,
+.is-greg-dancer-count:focus-visible {
+  outline: 2px solid #ff6600;
+  outline-offset: 4px;
+  border-radius: 9px;
+}
+
+/* The Gregs he throws when you click him. */
+
+.is-greg-burst-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482999;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.is-greg-confetto {
+  position: absolute;
+  left: 0;
+  top: 0;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.28));
+  will-change: transform;
+}
+
+@keyframes is-greg-confetto-fade {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.is-greg-confetto-still {
+  transform: translate(-50%, -50%);
+  animation: is-greg-confetto-fade 1400ms ease-in-out forwards;
+  will-change: auto;
+}
+
+@media (max-width: 640px) {
+  .is-greg-dancer {
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .is-greg-dancer-face {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-greg-dancer {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .is-greg-dancer-face,
+  .is-greg-dancer-button:hover .is-greg-dancer-face,
+  .is-greg-dancer-button:active .is-greg-dancer-face {
+    transform: none;
+    transition: none;
+  }
+
+  .is-greg-tip {
+    transform: none;
+    transition: none;
+  }
+
+  .is-greg-found {
+    animation: none;
+    outline: 2px solid #ff6600;
+    outline-offset: 2px;
+  }
 }
